@@ -1,0 +1,11 @@
+# OS
+.DS_Store
+
+# Temporary test outputs
+run-results.json
+
+# Legacy root-level screenshots (from older test runs)
+/live-*.png
+/step*.png
+/trans-*.png
+/frames/

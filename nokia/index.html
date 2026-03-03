@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nokia Corporation — DMA Showcase</title>
+    <meta name="description"
+        content="Visual walkthrough of Nokia Corporation's Double Materiality Assessment using ESGClick.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #0a0e17;
+            --surface: #111827;
+            --surface-alt: #0f1520;
+            --border: #1e293b;
+            --text: #e2e8f0;
+            --text-dim: #94a3b8;
+            --accent: #06b6d4;
+            --accent-glow: rgba(6, 182, 212, 0.15);
+            --nokia-blue: #124191;
+            --green: #10b981;
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* === NAV === */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(10, 14, 23, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        nav a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        nav .brand {
+            font-weight: 600;
+            color: var(--text);
+            font-size: 0.95rem;
+        }
+
+        /* === HERO === */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem 2.5rem;
+            background: linear-gradient(180deg, rgba(18, 65, 145, 0.12) 0%, transparent 100%);
+        }
+
+        .hero-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--accent);
+            background: var(--accent-glow);
+            border: 1px solid rgba(6, 182, 212, 0.25);
+            padding: 0.3rem 0.9rem;
+            border-radius: 100px;
+            margin-bottom: 1.25rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero .subtitle {
+            color: var(--text-dim);
+            font-size: 1.05rem;
+            max-width: 650px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat .val {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--green);
+        }
+
+        .hero-stat .lbl {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-dim);
+        }
+
+        /* === STEPS === */
+        .steps {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .step {
+            margin-bottom: 3rem;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .step-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--accent-glow);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            color: var(--accent);
+            font-size: 0.8rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .step-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+        }
+
+        .step-desc {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            padding-left: 2.75rem;
+        }
+
+        .step-gallery {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+        }
+
+        .step-gallery.cols-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .step-gallery.cols-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .screenshot {
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .screenshot:hover {
+            border-color: var(--accent);
+            transform: scale(1.01);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .screenshot img {
+            width: 100%;
+            display: block;
+        }
+
+        .screenshot .caption {
+            padding: 0.5rem 0.75rem;
+            background: var(--surface);
+            font-size: 0.75rem;
+            color: var(--text-dim);
+        }
+
+        /* === LIGHTBOX === */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 999;
+            background: rgba(0, 0, 0, 0.92);
+            align-items: center;
+            justify-content: center;
+            cursor: zoom-out;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 95vw;
+            max-height: 95vh;
+            border-radius: 8px;
+            box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 3rem 2rem 2rem;
+            color: var(--text-dim);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        @media (max-width: 600px) {
+
+            .step-gallery.cols-2,
+            .step-gallery.cols-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .steps {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="../index.html" class="brand">← DMA Showcase</a>
+        <a href="https://esgclick.eu">ESGClick</a>
+    </nav>
+
+    <section class="hero">
+        <span class="hero-badge">Case Study</span>
+        <h1>Nokia Corporation</h1>
+        <p class="subtitle">CSRD Double Materiality Assessment — AI-powered ESG impact and risk classification for a
+            global telecommunications leader operating in 130+ countries.</p>
+        <div class="hero-stats">
+            <div class="hero-stat"><span class="val">24</span><span class="lbl">Impacts</span></div>
+            <div class="hero-stat"><span class="val">12</span><span class="lbl">R&amp;Os</span></div>
+            <div class="hero-stat"><span class="val">5</span><span class="lbl">Team Members</span></div>
+            <div class="hero-stat"><span class="val">5</span><span class="lbl">Stakeholder Groups</span></div>
+            <div class="hero-stat"><span class="val">19</span><span class="lbl">Steps</span></div>
+        </div>
+    </section>
+
+    <div class="steps">
+
+        <!-- Step 1 -->
+        <div class="step">
+            <div class="step-header">
+                <span class="step-number">1</span>
+                <span class="step-title">Create DMA</span>
+            </div>
+            <p class="step-desc">Initialize a new Double Materiality Assessment with company details, ESRS reporting
+                period, and project configuration.</p>
+            <div class="step-gallery cols-2">
+                <div class="screenshot" onclick="openLightbox(this)">
+                    <img src="step01-create-modal.png" alt="DMA creation modal" loading="lazy">
+                    <div class="caption">DMA creation modal</div>
+                </div>
+                <div class="screenshot" onclick="openLightbox(this)">
+                    <img src="step01-dma-detail-overview.png" alt="DMA dashboard overview" loading="lazy">
+                    <div class="caption">DMA detail overview</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step">
+            <div class="step-header">
+                <span class="step-number">2</span>
+                <span class="step-title">Project Team</span>
+            </div>
+            <p class="step-desc">Assemble the internal DMA project team with defined roles and responsibilities.</p>
+            <div class="step-gallery">
+                <div class="screenshot" onclick="openLightbox(this)">
+                    <img src="step02-team-planning-full.png" alt="Project team planning" loading="lazy">
+                    <div class="caption">Team members and roles</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step">
+            <div class="step-header">
+                <span class="step-number">3</span>
+                <span class="step-title">Stakeholder Groups</span>
+            </div>
+            <p class="step-desc">Define external stakeholder groups who will participate in materiality surveys.</p>
+            <div class="step-gallery">
+                <div class="screenshot" onclick="openLightbox(this)">
+                    <img src="step03-stakeholder-full.png" alt="Stakeholder groups" loading="lazy">
+                    <div class="caption">Stakeholder group configuration</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="step">
+            <div class="step-header">
+                <span class="step-number">4</span>
+                <span class="step-title">Schedule Workshop 1</span>
+            </div>
+            <p class="step-desc">Set dates, send invitations, and distribute impact survey links to team members.</p>
+            <div class="step-gallery">
+                <div class="screenshot" onclick="openLightbox(this)">
+                    <img src="step04-details-links.png" alt="Workshop links" loading="lazy">
+                    <div class="caption">Survey links and scheduling</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="step">
+            <div class="step-header">
+                <span class="step-number">5</span>
+                <span class="step-title">Impact Proposals</span>
+            </div>
+            <p class="step-desc">Team members submit positive and negative ESG impact proposals through individual
+                surveys.</p>
+            <div class="step-gallery cols-2">
+                <div class="screenshot" onclick="openLightbox(this)">
+                    <img src="step05-impact-survey-form.png" alt="Impact survey form" loading="lazy">
+                    <div class="caption">Impact survey form</div>
+                </div>
+                <div class="screenshot" onclick="openLightbox(this)">
+                    <img src="step05-impact-survey-filled.png" alt="Impact survey filled" loading="lazy">
+                    <div class="caption">Completed impact proposals</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 6 -->
+        <div class="step">
+            <div class="step-header">
+                <span class="step-number">6</span>
+                <span class="step-title">Workshop 1 — Impact Validation</span>
+            </div>
+            <p class="step-desc">AI classifies all impact proposals against ESRS taxonomy. The team validates positive
+                and negative impacts.</p>
+            <div class="step-gallery cols-2">
+                <div class="screenshot" onclick="openLightbox(this)">
+                    <img src="step06-workshop1-positive.png" alt="Positive impacts" loading="lazy">
+                    <div class="caption">Positive impact validation</div>
+                </div>
+                <div class="screenshot" onclick="openLightbox(this)">
+                    <img src="step06-workshop1-negative.png" alt="Negative impacts" loading="lazy">
+                    <div class="caption">Negative impact validation</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 7 -->
+        <div class="step">
+            <div class="step-header">
+                <span class="step-number">7</span>
+                <span class="step-title">Translation Gate &amp; Stakeholder Engagement</span>
+            </div>
+            <p class="step-desc">AI translates all validated impacts into survey languages. The translation gate ensures
+                completeness before stakeholder surveys are sent.</p>
+            <div class="step-gallery cols-2">
+                <div class="screenshot" onclick="openLightbox(this)">
+                    <img src="step07-translation-matrix.png" alt="Translation matrix" loading="lazy">
+                    <div class="caption">Translation completeness matrix</div>
+                </div>
+                <div class="screenshot" onclick="openLightbox(this)">
+                    <img src="step07-engagement-impacts-top.png" alt="Engagement setup" loading="lazy">
+                    <div class="caption">Stakeholder engagement scheduling</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 8 -->
+        <div class="step">
+            <div class="step-header">
+                <span class="step-number">8</span>
+                <span class="step-title">Stakeholder Pairwise Surveys</span>
+            </div>
+            <p class="step-desc">External stakeholders rank impacts through pairwise comparison surveys in their
+                preferred language.</p>
+            <div class="step-gallery cols-2">
+                <div class="screenshot" onclick="openLightbox(this)">
+                    <img src="step08-links-table.png" alt="Survey links" loading="lazy">
+                    <div class="caption">Multilingual survey links</div>
+                </div>
+                <div class="screenshot" onclick="openLightbox(this)">
+                    <img src="step08-pairwise-survey.png" alt="Pairwise comparison survey" loading="lazy">
+                    <div class="caption">Pairwise comparison interface</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 9 -->
+        <div class="step">
+            <div class="step-header">
+                <span class="step-number">9</span>
+                <span class="step-title">Impact Results</span>
+            </div>
+            <p class="step-desc">View aggregated impact scores broken down by stakeholder group.</p>
+            <div class="step-gallery cols-2">
+                <div class="screenshot" onclick="openLightbox(this)">
+                    <img src="step09-impact-results-table.png" alt="Results table" loading="lazy">
+                    <div class="caption">Impact results by stakeholder</div>
+                </div>
+                <div class="screenshot" onclick="openLightbox(this)">
+                    <img src="step09-impact-by-stakeholder.png" alt="By stakeholder" loading="lazy">
+                    <div class="caption">Impact scores breakdown</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 10 -->
+        <div class="step">
+            <div class="step-header">
+                <span class="step-number">10</span>
+                <span class="step-title">Comparative Scatter Plot</span>
+            </div>
+            <p class="step-desc">Interactive visualization comparing impact significance across internal and external
+                stakeholder perspectives.</p>
+            <div class="step-gallery">
+                <div class="screenshot" onclick="openLightbox(this)">
+                    <img src="step10-comparative-full.png" alt="Comparative scatter plot" loading="lazy">
+                    <div class="caption">Impact materiality scatter plot</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 12 -->
+        <div class="step">
+            <div class="step-header">
+                <span class="step-number">12</span>
+                <span class="step-title">R&amp;O Impact Selection</span>
+            </div>
+            <p class="step-desc">Select which validated impacts will be carried forward for Risk &amp; Opportunity
+                assessment.</p>
+            <div class="step-gallery">
+                <div class="screenshot" onclick="openLightbox(this)">
+                    <img src="step12-ro-impact-selection.png" alt="R&O impact selection" loading="lazy">
+                    <div class="caption">Impact selection for R&amp;O phase</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 13 -->
+        <div class="step">
+            <div class="step-header">
+                <span class="step-number">13</span>
+                <span class="step-title">R&amp;O Proposals</span>
+            </div>
+            <p class="step-desc">Team members submit Risk and Opportunity proposals linked to the selected impacts.</p>
+            <div class="step-gallery cols-2">
+                <div class="screenshot" onclick="openLightbox(this)">
+                    <img src="step13-ro-survey-form.png" alt="R&O survey form" loading="lazy">
+                    <div class="caption">R&amp;O proposal form</div>
+                </div>
+                <div class="screenshot" onclick="openLightbox(this)">
+                    <img src="step13-ro-survey-filled.png" alt="R&O submitted" loading="lazy">
+                    <div class="caption">Completed R&amp;O proposals</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 14 -->
+        <div class="step">
+            <div class="step-header">
+                <span class="step-number">14</span>
+                <span class="step-title">Workshop 2 — R&amp;O Classification</span>
+            </div>
+            <p class="step-desc">AI classifies R&amp;O proposals. The team validates risks and opportunities against
+                ESRS topics.</p>
+            <div class="step-gallery cols-2">
+                <div class="screenshot" onclick="openLightbox(this)">
+                    <img src="step14-ws2-risks.png" alt="Risk classification" loading="lazy">
+                    <div class="caption">Risk classification</div>
+                </div>
+                <div class="screenshot" onclick="openLightbox(this)">
+                    <img src="step14-ws2-opportunities.png" alt="Opportunity classification" loading="lazy">
+                    <div class="caption">Opportunity classification</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 15 -->
+        <div class="step">
+            <div class="step-header">
+                <span class="step-number">15</span>
+                <span class="step-title">R&amp;O Stakeholder Engagement</span>
+            </div>
+            <p class="step-desc">Stakeholders evaluate the financial materiality of validated risks and opportunities.
+            </p>
+            <div class="step-gallery">
+                <div class="screenshot" onclick="openLightbox(this)">
+                    <img src="step15-ro-engagement-top.png" alt="R&O engagement" loading="lazy">
+                    <div class="caption">R&amp;O stakeholder engagement</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 16 -->
+        <div class="step">
+            <div class="step-header">
+                <span class="step-number">16</span>
+                <span class="step-title">R&amp;O Results</span>
+            </div>
+            <p class="step-desc">View aggregated R&amp;O scores from stakeholder evaluations.</p>
+            <div class="step-gallery cols-2">
+                <div class="screenshot" onclick="openLightbox(this)">
+                    <img src="step16-ro-results-table.png" alt="R&O results" loading="lazy">
+                    <div class="caption">R&amp;O results table</div>
+                </div>
+                <div class="screenshot" onclick="openLightbox(this)">
+                    <img src="step16-ro-by-stakeholder.png" alt="R&O by stakeholder" loading="lazy">
+                    <div class="caption">R&amp;O by stakeholder group</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 17 -->
+        <div class="step">
+            <div class="step-header">
+                <span class="step-number">17</span>
+                <span class="step-title">R&amp;O Comparative</span>
+            </div>
+            <p class="step-desc">Comparative visualization of R&amp;O financial materiality scores.</p>
+            <div class="step-gallery">
+                <div class="screenshot" onclick="openLightbox(this)">
+                    <img src="step17-ro-comparative-top.png" alt="R&O comparative" loading="lazy">
+                    <div class="caption">R&amp;O comparative analysis</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 18 -->
+        <div class="step">
+            <div class="step-header">
+                <span class="step-number">18</span>
+                <span class="step-title">Workshop 3 — Material Validation</span>
+            </div>
+            <p class="step-desc">Final workshop where the team validates the materiality matrix, confirming which ESG
+                topics are material.</p>
+            <div class="step-gallery cols-2">
+                <div class="screenshot" onclick="openLightbox(this)">
+                    <img src="step18-workshop3-top.png" alt="Workshop 3 top" loading="lazy">
+                    <div class="caption">Materiality validation — top</div>
+                </div>
+                <div class="screenshot" onclick="openLightbox(this)">
+                    <img src="step18-workshop3-bottom.png" alt="Workshop 3 bottom" loading="lazy">
+                    <div class="caption">Materiality validation — bottom</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 19 -->
+        <div class="step">
+            <div class="step-header">
+                <span class="step-number">19</span>
+                <span class="step-title">Material Report</span>
+            </div>
+            <p class="step-desc">The final DMA report with materiality matrix, ESRS topic mappings, charts, and detailed
+                tables.</p>
+            <div class="step-gallery cols-2">
+                <div class="screenshot" onclick="openLightbox(this)">
+                    <img src="step19-report-hero.png" alt="Report hero" loading="lazy">
+                    <div class="caption">Report overview</div>
+                </div>
+                <div class="screenshot" onclick="openLightbox(this)">
+                    <img src="step19-report-charts.png" alt="Report charts" loading="lazy">
+                    <div class="caption">Materiality charts</div>
+                </div>
+                <div class="screenshot" onclick="openLightbox(this)">
+                    <img src="step19-report-tables.png" alt="Report tables" loading="lazy">
+                    <div class="caption">Detailed data tables</div>
+                </div>
+                <div class="screenshot" onclick="openLightbox(this)">
+                    <img src="step19-report-section1.png" alt="Report section" loading="lazy">
+                    <div class="caption">Impact section detail</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="footer">
+        <p>Generated by <a href="https://esgclick.eu">ESGClick</a> — ESRS-aligned Double Materiality Assessment Platform
+        </p>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <img id="lightbox-img" src="" alt="Full screenshot">
+    </div>
+
+    <script>
+        function openLightbox(el) {
+            const src = el.querySelector('img').src;
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').classList.add('active');
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+</body>
+
+</html>
