@@ -31,7 +31,14 @@
         .hero-badge::before { content: '◆'; font-size: .6rem; }
         .hero h1 { font-family: var(--serif); font-size: clamp(2.6rem, 6vw, 5rem); font-weight: 400; line-height: 1.1; max-width: 920px; margin-bottom: 1.5rem; letter-spacing: -.02em; }
         .hero h1 em { font-style: italic; color: var(--accent); }
-        .hero p { font-size: 1.15rem; color: var(--muted); max-width: 640px; margin-bottom: 3rem; }
+        .hero p { font-size: 1.15rem; color: var(--muted); max-width: 640px; margin-bottom: 2rem; }
+        .hero-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; max-width: 800px; width: 100%; margin-bottom: 1.25rem; }
+        .hero-stat { display: flex; flex-direction: column; align-items: center; gap: .35rem; background: rgba(17,24,39,.7); border: 1px solid var(--border); border-radius: 14px; padding: 1rem .75rem .85rem; backdrop-filter: blur(8px); transition: border-color .3s, transform .3s; }
+        .hero-stat:hover { border-color: var(--accent); transform: translateY(-2px); }
+        .hero-stat .stat-icon { width: 28px; height: 28px; color: var(--accent); opacity: .8; flex-shrink: 0; }
+        .hero-stat .val { font-size: 1.65rem; font-weight: 700; color: var(--text); line-height: 1; }
+        .hero-stat .lbl { font-size: .68rem; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; text-align: center; line-height: 1.3; }
+        @media (max-width: 640px) { .hero-stats { grid-template-columns: repeat(2, 1fr); gap: .75rem; } .hero-stat .val { font-size: 1.3rem; } }
         .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
         .btn-primary { display: inline-flex; align-items: center; gap: .5rem; padding: .85rem 2rem; background: var(--accent); color: var(--bg); border: none; border-radius: 999px; font-size: .95rem; font-weight: 600; cursor: pointer; text-decoration: none; transition: transform .2s, box-shadow .2s; }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(6,182,212,.3); }
@@ -94,26 +101,50 @@
         <span class="hero-badge">CSRD · ESRS · Double Materiality</span>
         <h1>Your Complete <em>DMA</em> Platform</h1>
         <p>From stakeholder mapping to board-ready materiality reports — a guided Double Materiality Assessment for Norsk Hydro — Energy Business Area.</p>
-        <div style="display:inline-flex;align-items:center;gap:.5rem;background:var(--surface);border:1px solid var(--accent);padding:.35rem 1rem;border-radius:999px;font-size:.8rem;color:var(--accent);margin-bottom:1.5rem;font-weight:600;">v1.2</div>
+        <div style="display:inline-flex;align-items:center;gap:.5rem;background:var(--surface);border:1px solid var(--accent);padding:.35rem 1rem;border-radius:999px;font-size:.8rem;color:var(--accent);margin-bottom:2rem;font-weight:600;">v1.2</div>
         <div class="hero-stats">
-            <div class="hero-stat"><span class="val">1</span><span class="lbl">Process Owner</span></div>
-            <div class="hero-stat"><span class="val">7</span><span class="lbl">Project Team Members</span></div>
-            <div class="hero-stat"><span class="val">3</span><span class="lbl">Workshops</span></div>
-            <div class="hero-stat"><span class="val">5</span><span class="lbl">Stakeholder Groups</span></div>
-            <div class="hero-stat"><span class="val">1</span><span class="lbl">Languages</span></div>
+            <div class="hero-stat">
+                <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                <span class="val">7</span><span class="lbl">Team Members</span>
+            </div>
+            <div class="hero-stat">
+                <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                <span class="val">5</span><span class="lbl">Stakeholder Groups</span>
+            </div>
+            <div class="hero-stat">
+                <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                <span class="val">3</span><span class="lbl">Workshops</span>
+            </div>
+            <div class="hero-stat">
+                <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/></svg>
+                <span class="val">1</span><span class="lbl">Languages</span>
+            </div>
+            <div class="hero-stat">
+                <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                <span class="val">307</span><span class="lbl">Pairwise Comparisons</span>
+            </div>
         </div>
-        <div class="hero-stats" style="margin-top:0.75rem">
-            <div class="hero-stat"><span class="val">1,570</span><span class="lbl">Stakeholders Participated</span></div>
-            <div class="hero-stat"><span class="val">307</span><span class="lbl">Pairwise Comparisons</span></div>
-        </div>
-        <div class="hero-stats" style="margin-top:0.75rem">
-            <div class="hero-stat"><span class="val">24</span><span class="lbl">Impacts</span></div>
-            <div class="hero-stat"><span class="val">7</span><span class="lbl">Risks</span></div>
-            <div class="hero-stat"><span class="val">7</span><span class="lbl">Opportunities</span></div>
-        </div>
-        <div class="hero-stats" style="margin-top:0.75rem">
-            <div class="hero-stat"><span class="val">18</span><span class="lbl">Material IROs</span></div>
-            <div class="hero-stat"><span class="val">6</span><span class="lbl">Material ESRS Topics</span></div>
+        <div class="hero-stats" style="grid-template-columns: repeat(5, 1fr);">
+            <div class="hero-stat">
+                <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                <span class="val">24</span><span class="lbl">Impacts Assessed</span>
+            </div>
+            <div class="hero-stat">
+                <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 9v2m0 4h.01M5.07 19h13.86c1.54 0 2.5-1.67 1.73-3L13.73 4.99c-.77-1.33-2.69-1.33-3.46 0L3.34 16c-.77 1.33.19 3 1.73 3z"/></svg>
+                <span class="val">7</span><span class="lbl">Risks</span>
+            </div>
+            <div class="hero-stat">
+                <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+                <span class="val">7</span><span class="lbl">Opportunities</span>
+            </div>
+            <div class="hero-stat">
+                <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                <span class="val">18</span><span class="lbl">Material IROs</span>
+            </div>
+            <div class="hero-stat">
+                <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+                <span class="val">6</span><span class="lbl">ESRS Topics</span>
+            </div>
         </div>
         <div class="hero-cta">
             <a href="#step-01" class="btn-primary">Explore the Process ↓</a>
@@ -136,9 +167,9 @@
         </div>
         <p class="step-desc">Define your assessment scope — company name, reporting period, stakeholder languages (English) and ESRS topic coverage. The workflow and all sub-tasks are auto-generated instantly.</p>
         <div data-slider data-captions="DMA Dashboard — all assessments at a glance|Create DMA modal — title, languages & scope|DMA detail — workflow auto-generated">
-            <img data-src="showcase-screenshots/hydro-energy/step01-dma-dashboard.png" alt="DMA Dashboard — all assessments at a glance">
-            <img data-src="showcase-screenshots/hydro-energy/step01-create-modal.png" alt="Create DMA modal — title, languages & scope">
-            <img data-src="showcase-screenshots/hydro-energy/step01-dma-detail-overview.png" alt="DMA detail — workflow auto-generated">
+            <img data-src="step01-dma-dashboard.png" alt="DMA Dashboard — all assessments at a glance">
+            <img data-src="step01-create-modal.png" alt="Create DMA modal — title, languages & scope">
+            <img data-src="step01-dma-detail-overview.png" alt="DMA detail — workflow auto-generated">
         </div>
     </section>
 
@@ -154,9 +185,9 @@
             <div class="kpi-item"><span class="kpi-val">1</span><span class="kpi-label">Languages</span></div>
         </div>
         <div data-slider data-captions="Adding multilingual team members — English project team|Team member assignments — roles & departments|Full roster — 7 members across Energy Business Area EVP, Head of Sustainability, Head of Hydropower Operations…">
-            <img data-src="showcase-screenshots/hydro-energy/step02-team-planning-top.png" alt="Adding multilingual team members — English project team">
-            <img data-src="showcase-screenshots/hydro-energy/step02-team-planning-mid.png" alt="Team member assignments — roles & departments">
-            <img data-src="showcase-screenshots/hydro-energy/step02-team-planning-full.png" alt="Full roster — 7 members across Energy Business Area EVP, Head of Sustainability, Head of Hydropower Operations…">
+            <img data-src="step02-team-planning-top.png" alt="Adding multilingual team members — English project team">
+            <img data-src="step02-team-planning-mid.png" alt="Team member assignments — roles & departments">
+            <img data-src="step02-team-planning-full.png" alt="Full roster — 7 members across Energy Business Area EVP, Head of Sustainability, Head of Hydropower Operations…">
         </div>
     </section>
 
@@ -172,8 +203,8 @@
             <div class="kpi-item"><span class="kpi-val">English</span><span class="kpi-label">Languages</span></div>
         </div>
         <div data-slider data-captions="5 stakeholder groups with language assignments & contact persons|Group setup — size, languages, survey toggles">
-            <img data-src="showcase-screenshots/hydro-energy/step03-stakeholder-groups.png" alt="5 stakeholder groups with language assignments & contact persons">
-            <img data-src="showcase-screenshots/hydro-energy/step03-stakeholder-full.png" alt="Group setup — size, languages, survey toggles">
+            <img data-src="step03-stakeholder-groups.png" alt="5 stakeholder groups with language assignments & contact persons">
+            <img data-src="step03-stakeholder-full.png" alt="Group setup — size, languages, survey toggles">
         </div>
     </section>
 
@@ -192,7 +223,7 @@
         </div>
         <p class="step-desc">Set invitation dates, then dispatch personalised tokenised survey links to each team member. Each recipient gets a unique, secure URL requiring no login.</p>
         <div data-slider data-captions="Workshop 1 Pre-task — personalised survey links dispatched to team">
-            <img data-src="showcase-screenshots/hydro-energy/step04-details-links.png" alt="Workshop 1 Pre-task — personalised survey links dispatched to team">
+            <img data-src="step04-details-links.png" alt="Workshop 1 Pre-task — personalised survey links dispatched to team">
         </div>
     </section>
 
@@ -208,8 +239,8 @@
             <div class="kpi-item"><span class="kpi-val">7</span><span class="kpi-label">Respondents</span></div>
         </div>
         <div data-slider data-captions="Impact survey — team proposes positive & negative impacts|Survey completed — impacts submitted for workshop review">
-            <img data-src="showcase-screenshots/hydro-energy/step05-impact-survey-form.png" alt="Impact survey — team proposes positive & negative impacts">
-            <img data-src="showcase-screenshots/hydro-energy/step05-impact-survey-filled.png" alt="Survey completed — impacts submitted for workshop review">
+            <img data-src="step05-impact-survey-form.png" alt="Impact survey — team proposes positive & negative impacts">
+            <img data-src="step05-impact-survey-filled.png" alt="Survey completed — impacts submitted for workshop review">
         </div>
     </section>
 
@@ -225,9 +256,9 @@
             <div class="kpi-item"><span class="kpi-val">1</span><span class="kpi-label">Languages</span></div>
         </div>
         <div data-slider data-captions="Workshop 1 — reviewing positive impact proposals|Workshop 1 — reviewing negative impact proposals|Impact validation complete — all 24 proposals reviewed">
-            <img data-src="showcase-screenshots/hydro-energy/step06-workshop1-positive.png" alt="Workshop 1 — reviewing positive impact proposals">
-            <img data-src="showcase-screenshots/hydro-energy/step06-workshop1-negative.png" alt="Workshop 1 — reviewing negative impact proposals">
-            <img data-src="showcase-screenshots/hydro-energy/step06-workshop1-full.png" alt="Impact validation complete — all 24 proposals reviewed">
+            <img data-src="step06-workshop1-positive.png" alt="Workshop 1 — reviewing positive impact proposals">
+            <img data-src="step06-workshop1-negative.png" alt="Workshop 1 — reviewing negative impact proposals">
+            <img data-src="step06-workshop1-full.png" alt="Impact validation complete — all 24 proposals reviewed">
         </div>
     </section>
 
@@ -250,9 +281,9 @@
             <div class="kpi-item"><span class="kpi-val">1</span><span class="kpi-label">Languages</span></div>
         </div>
         <div data-slider data-captions="Survey links table — one unique token per stakeholder group|Pairwise comparison UI — stakeholders choose between impact pairs|Language selector — stakeholders participate in their native language">
-            <img data-src="showcase-screenshots/hydro-energy/step08-links-table.png" alt="Survey links table — one unique token per stakeholder group">
-            <img data-src="showcase-screenshots/hydro-energy/step08-pairwise-survey.png" alt="Pairwise comparison UI — stakeholders choose between impact pairs">
-            <img data-src="showcase-screenshots/hydro-energy/step08-language-selector.png" alt="Language selector — stakeholders participate in their native language">
+            <img data-src="step08-links-table.png" alt="Survey links table — one unique token per stakeholder group">
+            <img data-src="step08-pairwise-survey.png" alt="Pairwise comparison UI — stakeholders choose between impact pairs">
+            <img data-src="step08-language-selector.png" alt="Language selector — stakeholders participate in their native language">
         </div>
     </section>
 
@@ -264,8 +295,8 @@
         </div>
         <p class="step-desc">View aggregated impact materiality scores from all stakeholder groups. Drill down by individual stakeholder group to see how different audiences prioritise impacts.</p>
         <div data-slider data-captions="Impact results — aggregated materiality scores|By stakeholder — drill down into group-specific priorities">
-            <img data-src="showcase-screenshots/hydro-energy/step09-impact-results-table.png" alt="Impact results — aggregated materiality scores">
-            <img data-src="showcase-screenshots/hydro-energy/step09-impact-by-stakeholder.png" alt="By stakeholder — drill down into group-specific priorities">
+            <img data-src="step09-impact-results-table.png" alt="Impact results — aggregated materiality scores">
+            <img data-src="step09-impact-by-stakeholder.png" alt="By stakeholder — drill down into group-specific priorities">
         </div>
     </section>
 
@@ -277,9 +308,9 @@
         </div>
         <p class="step-desc">Compare how different stakeholder groups rank the same impacts. Interactive scatter plot reveals alignment and divergence between groups — crucial for materiality decisions.</p>
         <div data-slider data-captions="Comparative analysis — select stakeholder groups to compare|Scatter plot — impact materiality across stakeholder groups|Legend — impact labels and positions explained">
-            <img data-src="showcase-screenshots/hydro-energy/step10-comparative-top.png" alt="Comparative analysis — select stakeholder groups to compare">
-            <img data-src="showcase-screenshots/hydro-energy/step10-comparative-scatter.png" alt="Scatter plot — impact materiality across stakeholder groups">
-            <img data-src="showcase-screenshots/hydro-energy/step10-comparative-legend.png" alt="Legend — impact labels and positions explained">
+            <img data-src="step10-comparative-top.png" alt="Comparative analysis — select stakeholder groups to compare">
+            <img data-src="step10-comparative-scatter.png" alt="Scatter plot — impact materiality across stakeholder groups">
+            <img data-src="step10-comparative-legend.png" alt="Legend — impact labels and positions explained">
         </div>
     </section>
 
@@ -291,7 +322,7 @@
         </div>
         <p class="step-desc">AI analyses validated impacts and automatically assigns ESRS topic classifications — mapping each impact to the correct European Sustainability Reporting Standard disclosure requirement.</p>
         <div data-slider data-captions="AI-assigned ESRS topics — automated classification of all impacts">
-            <img data-src="showcase-screenshots/hydro-energy/step11-ai-topics.png" alt="AI-assigned ESRS topics — automated classification of all impacts">
+            <img data-src="step11-ai-topics.png" alt="AI-assigned ESRS topics — automated classification of all impacts">
         </div>
     </section>
 
@@ -314,8 +345,8 @@
             <div class="kpi-item"><span class="kpi-val">7</span><span class="kpi-label">Respondents</span></div>
         </div>
         <div data-slider data-captions="R&O survey — link risks and opportunities to specific impacts|R&O survey completed — proposals submitted for workshop review">
-            <img data-src="showcase-screenshots/hydro-energy/step13-ro-survey-form.png" alt="R&O survey — link risks and opportunities to specific impacts">
-            <img data-src="showcase-screenshots/hydro-energy/step13-ro-survey-filled.png" alt="R&O survey completed — proposals submitted for workshop review">
+            <img data-src="step13-ro-survey-form.png" alt="R&O survey — link risks and opportunities to specific impacts">
+            <img data-src="step13-ro-survey-filled.png" alt="R&O survey completed — proposals submitted for workshop review">
         </div>
     </section>
 
@@ -327,9 +358,9 @@
         </div>
         <p class="step-desc">Process owner facilitated a workshop where the project team refined and validated risks and opportunities. AI translates R&amp;Os and process owner finalises them.</p>
         <div data-slider data-captions="Workshop 2 — classifying financial risks|Workshop 2 — classifying financial opportunities|Full R&O validation view">
-            <img data-src="showcase-screenshots/hydro-energy/step14-ws2-risks.png" alt="Workshop 2 — classifying financial risks">
-            <img data-src="showcase-screenshots/hydro-energy/step14-ws2-opportunities.png" alt="Workshop 2 — classifying financial opportunities">
-            <img data-src="showcase-screenshots/hydro-energy/step14-ws2-full.png" alt="Full R&O validation view">
+            <img data-src="step14-ws2-risks.png" alt="Workshop 2 — classifying financial risks">
+            <img data-src="step14-ws2-opportunities.png" alt="Workshop 2 — classifying financial opportunities">
+            <img data-src="step14-ws2-full.png" alt="Full R&O validation view">
         </div>
     </section>
 
@@ -341,8 +372,8 @@
         </div>
         <p class="step-desc">Stakeholders ranked risks and opportunities through multilingual pairwise comparison surveys.</p>
         <div data-slider data-captions="R&O engagement view — stakeholder survey dispatch|R&O survey GUI — pairwise comparison as stakeholders see it">
-            <img data-src="showcase-screenshots/hydro-energy/step15-ro-engagement-top.png" alt="R&O engagement view — stakeholder survey dispatch">
-            <img data-src="showcase-screenshots/hydro-energy/step15-ro-survey-gui.png" alt="R&O survey GUI — pairwise comparison as stakeholders see it">
+            <img data-src="step15-ro-engagement-top.png" alt="R&O engagement view — stakeholder survey dispatch">
+            <img data-src="step15-ro-survey-gui.png" alt="R&O survey GUI — pairwise comparison as stakeholders see it">
         </div>
     </section>
 
@@ -354,8 +385,8 @@
         </div>
         <p class="step-desc">Risks and Opportunities prioritised by the Stakeholder groups using pairwise comparison method.</p>
         <div data-slider data-captions="R&O results — financial materiality scores|By stakeholder — financial risk priorities per group">
-            <img data-src="showcase-screenshots/hydro-energy/step16-ro-results-table.png" alt="R&O results — financial materiality scores">
-            <img data-src="showcase-screenshots/hydro-energy/step16-ro-by-stakeholder.png" alt="By stakeholder — financial risk priorities per group">
+            <img data-src="step16-ro-results-table.png" alt="R&O results — financial materiality scores">
+            <img data-src="step16-ro-by-stakeholder.png" alt="By stakeholder — financial risk priorities per group">
         </div>
     </section>
 
@@ -367,8 +398,8 @@
         </div>
         <p class="step-desc">Compare how stakeholder groups assess financial risks and opportunities. Interactive scatter plot reveals where groups agree or diverge on financial materiality.</p>
         <div data-slider data-captions="R&O comparative analysis — select groups to compare|R&O scatter plot — financial materiality across groups">
-            <img data-src="showcase-screenshots/hydro-energy/step17-ro-comparative-top.png" alt="R&O comparative analysis — select groups to compare">
-            <img data-src="showcase-screenshots/hydro-energy/step17-ro-comparative-scatter.png" alt="R&O scatter plot — financial materiality across groups">
+            <img data-src="step17-ro-comparative-top.png" alt="R&O comparative analysis — select groups to compare">
+            <img data-src="step17-ro-comparative-scatter.png" alt="R&O scatter plot — financial materiality across groups">
         </div>
     </section>
 
@@ -387,7 +418,7 @@
         </div>
         <p class="step-desc">Project Team members prepared for the decision making by reading the consolidated IRO result table.</p>
         <div data-slider data-captions="Consolidated IRO result table">
-            <img data-src="showcase-screenshots/hydro-energy/step18-workshop3-top.png" alt="Consolidated IRO result table">
+            <img data-src="step18-workshop3-top.png" alt="Consolidated IRO result table">
         </div>
     </section>
 
@@ -399,10 +430,10 @@
         </div>
         <p class="step-desc">Process owner facilitated a workshop where the project team decided on which impacts, risks and opportunities are material aka strategic.</p>
         <div data-slider data-captions="Workshop 3 — double materiality matrix generation|Impact × Financial materiality combined view|Material topic selection — apply thresholds|Full Workshop 3 view">
-            <img data-src="showcase-screenshots/hydro-energy/step18-workshop3-top.png" alt="Workshop 3 — double materiality matrix generation">
-            <img data-src="showcase-screenshots/hydro-energy/step18-workshop3-mid.png" alt="Impact × Financial materiality combined view">
-            <img data-src="showcase-screenshots/hydro-energy/step18-workshop3-bottom.png" alt="Material topic selection — apply thresholds">
-            <img data-src="showcase-screenshots/hydro-energy/step18-workshop3-full.png" alt="Full Workshop 3 view">
+            <img data-src="step18-workshop3-top.png" alt="Workshop 3 — double materiality matrix generation">
+            <img data-src="step18-workshop3-mid.png" alt="Impact × Financial materiality combined view">
+            <img data-src="step18-workshop3-bottom.png" alt="Material topic selection — apply thresholds">
+            <img data-src="step18-workshop3-full.png" alt="Full Workshop 3 view">
         </div>
     </section>
 
@@ -419,11 +450,11 @@
             <div class="kpi-item"><span class="kpi-val">5</span><span class="kpi-label">Stakeholder Groups</span></div>
         </div>
         <div data-slider data-captions="Report hero — executive summary & key findings|Methodology and scope documentation|Interactive materiality scatter plots|Impact & financial materiality rankings|Full board-ready DMA report">
-            <img data-src="showcase-screenshots/hydro-energy/step19-report-hero.png" alt="Report hero — executive summary & key findings">
-            <img data-src="showcase-screenshots/hydro-energy/step19-report-section1.png" alt="Methodology and scope documentation">
-            <img data-src="showcase-screenshots/hydro-energy/step19-report-charts.png" alt="Interactive materiality scatter plots">
-            <img data-src="showcase-screenshots/hydro-energy/step19-report-tables.png" alt="Impact & financial materiality rankings">
-            <img data-src="showcase-screenshots/hydro-energy/step19-report-full.png" alt="Full board-ready DMA report">
+            <img data-src="step19-report-hero.png" alt="Report hero — executive summary & key findings">
+            <img data-src="step19-report-section1.png" alt="Methodology and scope documentation">
+            <img data-src="step19-report-charts.png" alt="Interactive materiality scatter plots">
+            <img data-src="step19-report-tables.png" alt="Impact & financial materiality rankings">
+            <img data-src="step19-report-full.png" alt="Full board-ready DMA report">
         </div>
     </section>
 
